@@ -1159,14 +1159,19 @@ class Application extends \Illuminate\Container\Container implements \Illuminate
     {
         $globals = [];
 
-        foreach ($this->viewComposers as $match => $composers)
+
+        foreach ($this->viewComposers as $composers)
         {
+
+            $match = $composers[0];
+            $c = $composers[1];
+
             if ( ! str_is($match, $view))
             {
                 continue;
             }
 
-            foreach ($composers as $composer)
+            foreach ($c as $composer)
             {
                 if (is_array($composer))
                 {
@@ -1175,7 +1180,9 @@ class Application extends \Illuminate\Container\Container implements \Illuminate
                     continue;
                 }
 
+
                 $globals = array_merge((array) $this->call($composer, ['app' => $this, 'view' => $view]));
+
             }
         }
 
