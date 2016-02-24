@@ -299,6 +299,8 @@ class Application extends \Illuminate\Container\Container implements \Illuminate
         $this->addPluginComposers(
             array_get($config, 'viewComposers', [])
         );
+
+        // todo: load providers from plugins
     }
 
     /**
